@@ -24,6 +24,20 @@ try{
 	$stmt = $db->prepare($query);
 	$r = $stmt->execute();
 	echo "<br>" . $r . "<br>";
+	
+	$insert_query = "INSERT INTO `TestUsers`( `username`, `pin`) VALUES (:username, :pin)";
+	
+	$stmt = $db->prepare($insert_query);
+	$newUser = "JohnDoe";
+	$newPin = 1234;
+	
+	$r = $stmt->execute(array(":username"=> $newUser, ":pin"=>$newPin));
+	print_r($stmt->errorInfo());
+
+	echo "<br>" . ($r>0?"Insert successful":"Insert failed") . "<br>";
+	
+
+
 }
 catch(Exception $e){
 	echo $e->getMessage();
