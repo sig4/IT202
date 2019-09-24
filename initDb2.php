@@ -5,6 +5,7 @@ error_reporting(E_ALL);
 require('config.php');
 echo "Loaded host: " . $host;
 $conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+echo "hello";
 try{
 	$db = new PDO($conn_string, $username, $password);
 	echo " Connected";
