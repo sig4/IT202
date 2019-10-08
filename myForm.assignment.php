@@ -11,6 +11,10 @@ function checkPassword(){
         if($_GET['password'] != $_GET['cpassword']){
                 echo "Passwords do not match";
         }
+	else{
+		echo "Passwords match";
+	}
+
 
 }
 
@@ -21,8 +25,8 @@ function checkPassword(){
 <body><?php getName();?>
 <form method="GET" action="#">
 <input name="name" type="text" placeholder="Enter your name"/>
-<input password="password" type="password" placeholder="Enter your password"/>
-<input cpassword="cpassword" type="password" placeholder="Re-Enter your password"/>
+<input type="password" name="password" placeholder="Enter your password"/>
+<input type="password" name="cpassword" placeholder="Re-Enter your password"/>
 <!-- add password field-->
 <!-- add confirm password field-->
 <!-- ensure passwords match before sending the form
@@ -32,12 +36,12 @@ function checkPassword(){
 <!-- change form submit type to post, adjust php checks for change in type-->
 
 <input type="submit" value="Try it"/>
-</form method ="GET" action="#">
+</form method ="POST" action="#">
 </body><?php checkPassword();?>
 </html>
 
 <?php
-if(isset($_GET)){
-	echo "<br><pre>" . var_export($_GET, true) . "</pre><br>";
+if(isset($_POST)){
+	echo "<br><pre>" . var_export($_POST, true) . "</pre><br>";
 }
 ?>
