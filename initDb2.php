@@ -21,7 +21,7 @@ try{
 	
 	$insert_query = "INSERT INTO `TestUsers`( `username`, `pin`) VALUES (:username, :pin)";
 	
-	$stmt = $db->prepare($insert_query);
+ 	$stmt = $db->prepare($insert_query);
 	$newUser = "JohnDoe";
 	$newPin = 1234;
 	

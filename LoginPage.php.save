@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require('config.php');
+echo "Loaded host: " . $host;
+$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+
+ini_set('display_errors',1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+function checkPasswords(){
+	if(isset($_POST['password']) && isset($_POST['confirm'])){
+		if($_POST['password'] == $_POST['confirm']){
+			echo "<br>Passwords Matched!<br>";
+		}
+		else{
+			echo "<br>Passwords didn't match!<br>";
+		}
+	}
+}
+?>
+<html>
+<head>
+<script>
+function validate(){
+	var form = document.forms[0];
+	var password = form.password.value;
+
+	console.log(password);
+
+
+	let pv = document.getElementById("validation.password");
+	let succeeded = true;
+	if(password == conf){
+		
+		pv.style.display = "none";
+		form.confirm.className= "noerror";	
+	}
+	else{
+		pv.style.display = "block";
+		pv.innerText = "Passwords don't match";
+		//form.confirm.focus();
+		form.confirm.className = "error";
+		//form.confirm.style = "border: 1px solid red;";
+		succeeded = false;
+	}
+
+	debugger;
+
+	console.log(sel.options[sel.selectedIndex].value);
+	return succeeded;	
+}
+</script>
+</head>
+<body>
+
+
+<form method="POST" action="#" onsubmit="return validate();">
+<input name="name" type="text" placeholder="Enter your name"/>
+
+<input type="password" name="password" placeholder="Enter password"/>
+
+
+<input type="submit" value="Try it"/>
+</form>
+</div>
+</body>
+</html>
+<?php checkPasswords();?>
+<?php
+if(isset($_POST)){
+	echo "<br><pre>" . var_export($_POST, true) . "</pre><br>";
+}
+?>
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require('config.php');
+echo "Loaded host: " . $host;
+$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+echo "hello";
+try{
+	$db = new PDO($conn_string, $username, $password);
+	echo " Connected";
+	$query = "create table if not exists `TestUsers` (
+		`id` int auto_increment not null,
+		`username` varchar(30) not null unique,
+		`pin` int default 0,
+		PRIMARY KEY (`id`)
+		) CHARACTER SET utf8 COLLATE utf8_general_ci";
+	$stmt = $db->prepare($query);
+	$r = $stmt->execute();
+	echo "<br>" . $r . "<br>";
+	
+	$insert_query = "INSERT INTO `TestUsers`( `username`, `pin`) VALUES (:username, :pin)";
+	
+	$stmt = $db->prepare($insert_query);
+
+
+	$newUser = "JohnDoe" ;
+	$newPin = 1234;
+	
+	$r = $stmt->execute(array(":username"=> $newUser, ":pin"=>$newPin));
+	print_r($stmt->errorInfo());
+	echo "<br>" . ($r>0?"Insert successful":"Insert failed") . "<br>";
+	
+}
+catch(Exception $e){
+	echo $e->getMessage();
+	echo "Something went wrong";
+}
+?>
