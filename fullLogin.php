@@ -24,28 +24,22 @@
 </head>
 
 <form method="POST" action="#" >
-<input name="name" id="name" type="text" placeholder="Enter your name"/>
+
+UserName: <input name="name" id="name" type="text" placeholder="Enter your name"/><br>
 
 
 
-<input type="password" name="password" placeholder="Enter password"/>
+Password: <input type="password" name="password" placeholder="Enter password"/><br>
 
 
 
-<input type="submit" value="Try it"/>
+<input type="submit" value="Login"/>
+
+<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register"/>
+
 </form>
 
-<body onload="queryParam();">
-	<header>
-		<nav> 
-			<a href="?page=home">Home  </a> 
-			<a href="?page=about">About</a>
-		</nav>
-	</header>
-	<div id="home">
-		This is home
-	</div>
-</html>
+
 
 <?php
 ini_set('display_errors',1);
@@ -53,6 +47,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 if(isset($_POST)){
 	echo "<br><pre>" . var_export($_POST, true) . "</pre><br>";
+
 	$name = $_POST["name"];
 	$pass = $_POST["password"];
 	require('config.php');
@@ -70,6 +65,7 @@ $user = $stmt->fetch();
 if ($user) {
 	
 	echo "LOGIN SUCCESSFUL";
+	header("Location: sampleLanding.php");
 }
 else{
 		echo "LOGIN FAILED";
