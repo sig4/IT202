@@ -12,7 +12,8 @@ error_reporting(E_ALL);
 	User Name:	<input type="text" name="username"/><br>
 	Password: 	<input type="password" name="password"/><br>
 		<input type="submit" value="Login"/>
-	 <input type="submit" value="GO TO WEB"/>
+		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register"/>
+
 	</form>
 </body>
 </html>
@@ -50,14 +51,12 @@ error_reporting(E_ALL);
 					$_SESSION['user'] = $user;
 				//	echo var_export($user, true);
 				//	echo var_export($_SESSION, true);
-//					header("Location: sampleLanding.php");
+					header("Location: Home.php");
 //
 //               				 <input type="submit" value="Go TO WEB"/>
 	
 							
 	}
-
-				
 				else{
 					echo "Invalid password";
 				}

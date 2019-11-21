@@ -8,6 +8,9 @@ session_start();
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <script>
+
+
+
 $(document).ready(function(){
 	var nav = ["Home", "About", "Logout"];
 	nav.forEach(function(item, index){
@@ -36,5 +39,11 @@ $(document).ready(function(){
 </head>
 <body>
 Hello there, <?php echo $_SESSION['user']['name'];?>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
 </body>
 </html>
