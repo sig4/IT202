@@ -20,25 +20,12 @@ $(document).ready(function(){
 			$("body").append(ele[0]);
 	});
 	
-/*	 $.ajax({
-			url: "get.php", 
-			method: "POST", 
-			data: {"type":"login", "username":"bob", "password":"1234"}, 
-			success: function(result){
-					console.log(result);
-					alert(result);
-					result = JSON.parse(result);
-					alert("Status: " + result.status);
-			},
-			fail: function(jqXHR, textStatus){
-				console.log(jqXHR, textStatus);
-			}
-		});*/
 });
 </script>
 </head>
 <body>
-Hello there, <?php echo $_SESSION['user']['name'];?>
+Hello there, <?php echo $_SESSION['usr']['name'];?><br>
+		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/testDup2.php';" value="View Driver Profile"/><br>
 <form action="upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">

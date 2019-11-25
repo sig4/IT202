@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors',1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -50,14 +51,26 @@ error_reporting(E_ALL);
 	
 			$db = new PDO($conn_string, $username, $password);
 
+// $stmt = $db->prepare("select First_Name, Last_Name, Where, How, Time, Date, Make, Model, Plate from `Customer1Incident` where First_Name = :first_name LIMIT 1");
 	
-			$stmt = $db->prepare("INSERT into `Customer1Incident` (`First_Name`, `Last_Name`, `Where`, `How`, `Time`, `Date`, `Make`, `Model`, `Plate`) VALUES (:first_name, :last_name, :address, :how, :time, :date, :make, :model, :plate)");
+			$stmt = $db->prepare("INSERT into `Customer1Incident` (`First_Name`, `Last_Name`, `address`, `How`, `Time`, `Date`, `Make`, `Model`, `Plate`) VALUES (:first_name, :last_name, :address, :how, :time, :date, :make, :model, :plate)");
 			$result = $stmt->execute(
 				array(":first_name"=>$first_name, ":last_name" =>$last_name, ":address" =>$where, ":how" => $how, ":time"=>$time, ":date" =>$date, ":make" =>$make, ":model"=>$model, ":plate"=>$plate) 
 				
 			);
+		
+         // $custProf = array("First_Name"=> $results['First_Name'], "Last_Name"=> $results['Last_Name'],
+           //                                                   "Where"=> $results['Where'], "How"=> $results['How'], "Time"=> $results['Time'], "Date"=> $results['Dat$
+             //                                                 "Make"=> $results['Make'], "Model"=> $results['Model'], "Plate"=> $results['Plate']
+	//			);
+
+          //                              $_SESSION['customerProf'] = $custProf;
+
 			print_r($stmt->errorInfo());
+			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			
+			echo "Welcom" .	$_SESSION['usr']['name'];
+			//echo "Location" .  $results[":first_name"][":address"];
 			echo var_export($result, true);
 		}
 		catch(Exception $e){

@@ -5,22 +5,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 
-<div class="header">
-  <h1>SIG INSURANCE</h1>
-  <p>Dont make the accident of not choosing US</p>
-  <p>Employee login</p>
-
-</div>
-<style>
-.header {
-  padding: 60px;
-  text-align: center;
-  background: #1abc9c;
-  color: white;
-  font-size: 30px;
-}
-</style>
-
 <html>
 <head></head>
 <body>
@@ -28,7 +12,7 @@ error_reporting(E_ALL);
 	User Name:	<input type="text" name="username"/><br>
 	Password: 	<input type="password" name="password"/><br>
 		<input type="submit" value="Login"/>
-		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register as  Employee"/>
+		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register"/>
 
 	</form>
 </body>
@@ -52,7 +36,6 @@ error_reporting(E_ALL);
 			//print_r($stmt->errorInfo());
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			//echo var_export($results, true);
-
 //			echo $pass;
 //			echo $results['pin'];
 			if($results && count($results) > 0){
@@ -64,7 +47,7 @@ error_reporting(E_ALL);
 								"name"=> $results['First_Name']
 								);
 					
-					$_SESSION['usr'] = $user;
+					$_SESSION['user'] = $user;
 				//	echo var_export($user, true);
 				//	echo var_export($_SESSION, true);
 					header("Location: Home.php");
