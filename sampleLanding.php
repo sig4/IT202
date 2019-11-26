@@ -26,11 +26,34 @@ $(document).ready(function(){
 <body>
 Hello there, <?php echo $_SESSION['usr']['name'];?><br>
 		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/testDup2.php';" value="View Driver Profile"/><br>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
+<form method="post" >
+    Put link for image to upload:
+    <input type="text" name="fileToUpload" 
     <input type="submit" value="Upload Image" name="submit">
 </form>
+<?php
+		$img = $_POST['fileToUpload'];
+
+try{
+	
+	require("config.php");
+	$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
+			$db = new PDO($conn_string, $username, $password);
+			$stmt = $db->prepare("INSERT into `images` (link) VALUES(:link)");
+			$result = $stmt->execute(
+				array(":link"=>$img
+				)
+			);
+//			print_r($stmt->errorInfo());
+			
+//			echo var_export($result, true);
+		}
+		catch(Exception $e){
+			echo $e->getMessage();
+		}
+	
+?>
+
 
 </body>
 </html>
