@@ -1,4 +1,3 @@
-
 <?php
 ini_set('display_errors',1);
 ini_set('display_startup_errors', 1);
@@ -17,13 +16,10 @@ function checkPasswords(form){
 </head>
 <body>
 	<form method="POST" onsubmit="return checkPasswords(this);"/>
-	UserName:	<input type="text" name="username"/> <br>
-	First Name:	<input type="text" name="First Name"/> <br>
-	Password:	<input type="password" name="password"/> <br>
-	Confirm Password:	<input type="password" name="confirm"/><br>
-
-			<input type="submit" value="Register"/>
-
+		<input type="text" name="username"/>
+		<input type="password" name="password"/>
+		<input type="password" name="confirm"/>
+		<input type="submit" value="Register"/>
 	</form>
 </body>
 </html>
@@ -34,12 +30,7 @@ function checkPasswords(form){
 			
 		$user = $_POST['username'];
 		$pass = $_POST['password'];
-		$First_Name = $_POST['First_Name'];
-
 		$confirm = $_POST['confirm'];
-		//$who = $_POST['who'];
-		
-
 		if($pass != $confirm){
 				echo "Passwords don't match";
 				exit();
@@ -52,10 +43,10 @@ function checkPasswords(form){
 			//$username, $password, $host, $database
 			$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 			$db = new PDO($conn_string, $username, $password);
-			$stmt = $db->prepare("INSERT into `Users` (`username`, `password`, `First_Name`) VALUES(:username, :password, :First_Name)");
+			$stmt = $db->prepare("INSERT into `Users` (`username`, `password`) VALUES(:username, :password)");
 			$result = $stmt->execute(
 				array(":username"=>$user,
-					":password"=>$hash, ":First_Name"=>$First_Name
+					":password"=>$hash
 				)
 			);
 			print_r($stmt->errorInfo());

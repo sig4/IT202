@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 <div class="header">
   <h1>SIG INSURANCE</h1>
   <p>Dont make the accident of not choosing US</p>
-  <p>Employee login</p>
+  <p>Customer login</p>
 
 </div>
 <style>
@@ -28,7 +28,7 @@ error_reporting(E_ALL);
 	User Name:	<input type="text" name="username"/><br>
 	Password: 	<input type="password" name="password"/><br>
 		<input type="submit" value="Login"/>
-		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register as  Employee"/>
+		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/regProj.php';" value="Register as  Customer"/>
 
 	</form>
 </body>
@@ -46,18 +46,17 @@ error_reporting(E_ALL);
 			$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 			$db = new PDO($conn_string, $username, $password);
 			
-			$stmt = $db->prepare("select id, username, password, First_Name from `Users` where username = :username LIMIT 1");
+			$stmt = $db->prepare("select id, username, pin, First_Name, who from `TestUsers1` where username = :username LIMIT 1");
 			
 			$stmt->execute(array(":username"=>$user));
 			//print_r($stmt->errorInfo());
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			//echo var_export($results, true);
-
-//	echo $pass;
-//			echo $results['pin'];
+//			echo $pass;
+			$x= $results['who'];
+//			echo $x == "Customer";			
 			if($results && count($results) > 0){
-				$hash = password_hash($results['password'], PASSWORD_BCRYPT);
-		//	echo $hash;
+				$hash = password_hash($results['pin'], PASSWORD_BCRYPT);
 				if(password_verify($pass, $hash)){
 					echo "Welcome, " . $results["First_Name"];
 				//	echo "[" . $results["id"] . "]";
