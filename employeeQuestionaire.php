@@ -6,10 +6,13 @@ error_reporting(E_ALL);
 ?>
 
 <form method="POST">
-  First name:<br>
-  <input type="text" name="firstname"><br>
-  Last name:<br>
-  <input type="text" name="lastname"><br>
+  Incident Number: <br>
+  <input type="text" name= "incident"><br>
+
+  Was anyone injured in the accident:<br>
+  <input type="text" name="injuries"><br>
+  Any possible foul play between drivers:<br>
+  <input type="text" name="foulPlay"><br>
   Where did incident occur:<br>
   <input type="text" name="where"><br>
   How did incident occur:<br>
@@ -19,23 +22,33 @@ error_reporting(E_ALL);
   Date of Incident:<br>
   <input type="date" name="date"><br>
 
-  Make of car:<br>
+  Make of car1:<br>
   <input type="text" name="make"><br>
-  Model of car:<br>
+  Model of car1:<br>
   <input type="text" name="model"><br>
-  Licence Plate:<br>
+  Licence Plate of car1:<br>
   <input type="text" name="Plate"><br>
+  
+  Make of car2:<br>
+  <input type="text" name="make2"><br>
+  Model of car2:<br>
+  <input type="text" name="model2"><br>
+  Licence Plate of car2:<br>
+  <input type="text" name="Plate2"><br>
+
+  Any environemental damage such as trees/dividers/rocks:<br>
+  <input type="text" name="environDamage"><br>
+
   Description of Damage:<br>
   <input type="text" name="Damage"><br>
 <input type="submit" value="Register"/>
-<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/Home.php';" value ="Return to HOME"/>
+<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/sampleLanding.php';" value="Back to Employee Dashboard"/>
 
 
 </form>
 <?php
 		
-		$first_name = $_POST['firstname'];
-		$last_name = $_POST['lastname'];
+		$incident = $POST['incident'];
 		$where = $_POST['where'];
 		$how = $_POST['how'];
 		$time = $_POST['time'];
@@ -43,20 +56,25 @@ error_reporting(E_ALL);
 		$make = $_POST['make'];
 		$model = $_POST['model'];
 		$plate = $_POST['Plate'];
+		
+		$make2 = $_POST['make2'];
+                $model2 = $_POST['model2'];
+                $plate2 = $_POST['Plate2'];
+	
+		$environDamage = $_POST['environDamage'];
+		$damage = $_POST['Damage'];		
 
-			
 		try{
 			require("config.php");
 			//$username, $password, $host, $database
 			$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 	
 			$db = new PDO($conn_string, $username, $password);
-
-// $stmt = $db->prepare("select First_Name, Last_Name, Where, How, Time, Date, Make, Model, Plate from `Customer1Incident` where First_Name = :first_name LIMIT 1");
+// $stmt = $db->prepare("select id, Where, How, Time, Date, Make, Model, Plate, Make2 from `employeeIncident` where First_Name = :first_name LIMIT 1");
 	
-			$stmt = $db->prepare("INSERT into `Customer1Incident` (`First_Name`, `Last_Name`, `address`, `How`, `Time`, `Date`, `Make`, `Model`, `Plate`) VALUES (:first_name, :last_name, :address, :how, :time, :date, :make, :model, :plate)");
+			$stmt = $db->prepare("INSERT into `employeeIncident` (`id`, `address`, `How`, `Time`, `Date`, `Make`, `Model`, `Plate`, `Make2`, `Model2`, `Plate2`, `environDamage`, `Damage`) VALUES (:id, :address, :how, :time, :date, :make, :model, :plate, :make2, :model2, :plate2, :environDamage, :damage)");
 			$result = $stmt->execute(
-				array(":first_name"=>$first_name, ":last_name" =>$last_name, ":address" =>$where, ":how" => $how, ":time"=>$time, ":date" =>$date, ":make" =>$make, ":model"=>$model, ":plate"=>$plate) 
+				array(":id"=>$incident, ":address" =>$where, ":how" => $how, ":time"=>$time, ":date" =>$date, ":make" =>$make, ":model"=>$model, ":plate"=>$plate, ":make2"=>$make2, ":model2"=>$model2, ":plate2"=>$plate2, ":environDamage"=>$environDamage, ":damage"=>$damage) 
 				
 			);
 		
@@ -64,9 +82,7 @@ error_reporting(E_ALL);
            //                                                   "Where"=> $results['Where'], "How"=> $results['How'], "Time"=> $results['Time'], "Date"=> $results['Dat$
              //                                                 "Make"=> $results['Make'], "Model"=> $results['Model'], "Plate"=> $results['Plate']
 	//			);
-
           //                              $_SESSION['customerProf'] = $custProf;
-
 			print_r($stmt->errorInfo());
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			

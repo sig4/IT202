@@ -26,11 +26,16 @@ $(document).ready(function(){
 <body>
 Hello there, <?php echo $_SESSION['usr']['name'];?><br>
 		<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/testDup2.php';" value="View Driver Profile"/><br>
+                <input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/employeeQuestionaire.php';" value="Fill out Employee Questionaire"/><br>
+		
 <form method="post" >
     Put link for image to upload:
     <input type="text" name="fileToUpload" 
     <input type="submit" value="Upload Image" name="submit">
 </form>
+
+	
+
 <?php
 		$img = $_POST['fileToUpload'];
 
