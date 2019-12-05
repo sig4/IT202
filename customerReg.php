@@ -28,7 +28,7 @@ error_reporting(E_ALL);
   Description of Damage:<br>
   <input type="text" name="Damage"><br>
 <input type="submit" value="Register"/>
-<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/Home.php';" value ="Return to HOME"/>
+<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/driverHome.php';" value ="Return to HOME"/>
 
 
 </form>
