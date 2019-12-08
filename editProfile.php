@@ -24,6 +24,8 @@ error_reporting(E_ALL);
 	of ID:		<input type="text" name="ID"/>	
 	to:		<input type="text" name="newUpdate"/><br>
 <input type="submit" name="submit" value="Submit" />
+<input type="button" onclick="window.location.href = 'https://web.njit.edu/~sig4/IT202/driverHome.php';" value ="Return to Home"/>
+
 
 	</form>
 </body>
@@ -74,7 +76,7 @@ try {
 			$sql = "UPDATE Customers SET username=:username WHERE id= :id";
 			$stmt= $conn->prepare($sql);
 			$stmt->execute(array(":username"=> $newVal, ":id"=> $ID));
-			echo "Change successful refresh profile to view change";  // Displaying Selected Value
+			echo "Login again to see the change";  // Displaying Selected Value
 	
 		}
 		if($selected_val == "changePassword"){
@@ -83,17 +85,22 @@ try {
 			$hash = password_hash($newVal, PASSWORD_BCRYPT);
 
                         $stmt->execute(array(":password"=> $hash, ":id"=> $ID));
-			echo "Change successful refresh profile to view change";  // Displaying Selected Value	
+                        echo "Login again to see the change";  // Displaying Selected Value
+		
+	echo "Change successful refresh profile to view change";  // Displaying Selected Value	
 		}
 		if($selected_val == "changeFirstName"){
                         $sql = "UPDATE Customers SET First_Name=:first_name WHERE id= :id";
                         $stmt= $conn->prepare($sql);
                         $stmt->execute(array(":first_name"=> $newVal, ":id"=> $ID));
-                        echo "Change successful refresh profile to view change";  // Displaying Selected Value
+                        echo "Login again to see the change";  // Displaying Selected Value
+
+                       
 		 }
 
 
 	}
+
 }
 catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
