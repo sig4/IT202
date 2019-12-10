@@ -34,24 +34,52 @@ error_reporting(E_ALL);
 </form>
 <?php
 		
-		$first_name = $_POST['firstname'];
-		$last_name = $_POST['lastname'];
-		$where = $_POST['where'];
-		$how = $_POST['how'];
-		$time = $_POST['time'];
-		$date = $_POST['date'];
-		$make = $_POST['make'];
-		$model = $_POST['model'];
-		$plate = $_POST['Plate'];
+	$first_name="";
+	$last_name="";
+	$where="";
+	$how="";
+	$time="";
+	$date="";
+	$time="";
+	$date="";
+	$make="";
+	$model="";
+	$plate="";
 
-			
+	
+	if(isset($_POST['firstname'])){	
+	$first_name = $_POST['firstname'];
+		}
+	if(isset($_POST['lastname'])){
+		$last_name = $_POST['lastname'];
+		}
+	if(isset($_POST['where'])){
+		$where = $_POST['where'];
+		}
+	if(isset($_POST['how'])){
+		$how = $_POST['how'];
+		}
+	if(isset($_POST['time'])){
+		$time = $_POST['time'];
+		}
+	if(isset($_POST['date'])){
+		$date = $_POST['date'];
+		}
+	if(isset($_POST['make'])){	
+		$make = $_POST['make'];
+		}
+	if(isset($_POST['model'])){
+		$model = $_POST['model'];
+		}		
+	if(isset($_POST['Plate'])){
+	$plate = $_POST['Plate'];
+		}
 		try{
 			require("config.php");
 			//$username, $password, $host, $database
 			$conn_string = "mysql:host=$host;dbname=$database;charset=utf8mb4";
 	
 			$db = new PDO($conn_string, $username, $password);
-
 // $stmt = $db->prepare("select First_Name, Last_Name, Where, How, Time, Date, Make, Model, Plate from `Customer1Incident` where First_Name = :first_name LIMIT 1");
 	
 			$stmt = $db->prepare("INSERT into `Customer1Incident` (`First_Name`, `Last_Name`, `address`, `How`, `Time`, `Date`, `Make`, `Model`, `Plate`) VALUES (:first_name, :last_name, :address, :how, :time, :date, :make, :model, :plate)");
@@ -64,14 +92,12 @@ error_reporting(E_ALL);
            //                                                   "Where"=> $results['Where'], "How"=> $results['How'], "Time"=> $results['Time'], "Date"=> $results['Dat$
              //                                                 "Make"=> $results['Make'], "Model"=> $results['Model'], "Plate"=> $results['Plate']
 	//			);
-
           //                              $_SESSION['customerProf'] = $custProf;
-
 			print_r($stmt->errorInfo());
 			$results = $stmt->fetch(PDO::FETCH_ASSOC);
 			
-			echo "Welcom" .	$_SESSION['usr']['name'];
-			//echo "Location" .  $results[":first_name"][":address"];
+			echo "Welcome " .	$_SESSION['usr']['name'];
+			//echo "Location" .  $results[":first_name"][":address"] . " ";
 			echo var_export($result, true);
 		}
 		catch(Exception $e){

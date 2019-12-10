@@ -47,23 +47,59 @@ error_reporting(E_ALL);
 
 </form>
 <?php
+		$incident="";
+		$where="";
+		$how="";
+		$time="";
+		$date="";
 		
+		if(isset($_POST['incident'])){		
 		$incident = $POST['incident'];
+		}
+                if(isset($_POST['where'])){
 		$where = $_POST['where'];
+		}
+                if(isset($_POST['how'])){
 		$how = $_POST['how'];
+		}
+                if(isset($_POST['time'])){
 		$time = $_POST['time'];
+		}
+                if(isset($_POST['date'])){
 		$date = $_POST['date'];
+		}
+		$make="";
+		$model="";
+		$plate="";
+		$make2="";
+		$model2="";
+		$plate2="";
+                if(isset($_POST['make'])){
 		$make = $_POST['make'];
+		}
+                if(isset($_POST['model'])){
 		$model = $_POST['model'];
+		}
+                if(isset($_POST['Plate'])){
 		$plate = $_POST['Plate'];
-		
+		}
+                if(isset($_POST['make2'])){
 		$make2 = $_POST['make2'];
+		}
+                if(isset($_POST['model2'])){
                 $model2 = $_POST['model2'];
+		}
+                if(isset($_POST['Plate2'])){
                 $plate2 = $_POST['Plate2'];
-	
+		}
+		$environDamage="";
+		$damage="";
+                if(isset($_POST['environDamage'])){
 		$environDamage = $_POST['environDamage'];
+		}
+                if(isset($_POST['Damage'])){
 		$damage = $_POST['Damage'];		
-
+		}
 		try{
 			require("config.php");
 			//$username, $password, $host, $database

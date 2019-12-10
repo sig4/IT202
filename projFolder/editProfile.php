@@ -51,7 +51,10 @@ class TableRows extends RecursiveIteratorIterator {
 }
 		$user = $_SESSION['usr']['name'];
 		$ID = $_SESSION['usr']['id'];
+		if(isset($_POST['newUpdate'])){
 		$newVal = $_POST['newUpdate'];
+		}
+
 
 try {
 			require("config.php");
